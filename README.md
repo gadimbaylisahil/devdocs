@@ -1,1 +1,1 @@
-# Developer Documentations & Book Summaries
+# Dev docs and book summaries
