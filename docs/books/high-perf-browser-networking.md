@@ -6,17 +6,17 @@
 
 `Bandwidth`
 
-- Maximum throughput of a logical or physical communication path
+- Maximum throughput of a logical or a physical communication path
 
 `CDN`
 
-- Chief benefits is distributing content around the globe, serving content from nearby location to the client.
+- Distributing content around the globe, serving content from nearby location to the client.
 
 `Last-Mile Latency`
 
-- It's often that the last few stops of the packet is the slowest. To connect your home/device/office to internet, your ISP needs to route the cables throughout the neighbourhood, aggregate the signal, and forward it to local routing node. 
+- It's often that the last few stops of the packet is the slowest. To connect your home/device/office to internet, your ISP needs to route the cables throughout the neighbourhood, aggregate the signal, and forward it to local routing node.
 
-Use traceroute to checks the hops to the destination.
+Use traceroute to check the hops to the destination.
 
 ```shell
 traceroute google.com
@@ -24,15 +24,15 @@ traceroute google.com
 
 ### Awareness
 
-Speed of light places a hard limit on how fast energy can travel.(300.000 km/s). Current fiber optic lines already can process packets in nearly 200.000 km/s.
+Speed of light places a hard limit on how fast energy can travel (300.000 km/s). Current fiber optic lines already can process packets in nearly 200.000 km/s.
 
-So, even reaching the speed of light, would bring just 30-40% improvement only.
+So, even reaching the speed of light would bring just 30-40% improvement.
 
-Thus, we must improve performance of our applications by architecting and optimizing our protocols and networking code while keeping in mind the limitations of available bandwitdth, and the speed of light.
+Thus, we must improve performance of our applications by architecting and optimizing our protocols and networking code while keeping in mind the limitations of available bandwidth, and the speed of light.
 
 - Reduce roundtrips
 - Move the data closer to client
-- Build applications that hides latency through caching, pre-fetching
+- Build applications that hide latency through caching, pre-fetching
 
 ## Chapter 2 - Building Blocks of TCP
 
@@ -48,7 +48,7 @@ TCP is optimized to accurate delivery rather than speed, thus, it may bring chal
 
 ### Three-way handshake
 
-All TCP connections starts with 3 way handshake. Once the handshake is complete, data can flow between client and server. Client can send a packet right after the ACK (last packet of the 3step handshake), and the server `must` wait for ACK before dispatching any data.
+All TCP connections starts with 3 way handshake. Once the handshake is complete, data can flow between client and server. Client can send a packet right after the ACK (last packet of the 3 step handshake), and the server `must` wait for ACK before dispatching any data.
 
 This means that each connection will have a roundtrip of latency before any data can be transferred.
 
@@ -76,7 +76,7 @@ TCP slow start is an algorithm which balances the speed of a network connection.
 
 Product of data link's capacity and its end to end delay. Result is the maximum amount of unacknowledged data that can be in flight at any point in time.
 
-How bid do flow control(rwnd) and congestion control(cwnd) window values should be?
+How big should flow control(rwnd) and congestion control(cwnd) window values be?
 
 `Example`
 
@@ -90,15 +90,15 @@ How bid do flow control(rwnd) and congestion control(cwnd) window values should 
 
 Regardless of available bandwidth, TCP connection will not exceed a 1,31Mbps data rate! To achieve a better data rate, we would need to increase the minimum window size or reduce the roundtrip.
 
-### TCP / UPD - When to use what?
+### TCP / UPD - When to use what
 
-TCP brings features to the table such as reliable delivery and in order packet transmission, which is great but comes at the expense of extra latency.
+TCP brings features to the table such as reliable delivery and `in-order` packet transmission, which is great but comes at the expense of extra latency.
 
-However, not all applications' requirements are same, thus, not all would need reliable delivery and can handle packet losses without sweat.
+However, not all applications' requirements are same, thus, not all would need reliable delivery and can handle packet loss without a sweat.
 
-These, can be video streaming, 3D games, audio streaming, where small losses of packets would not affect the overall experience, however, extra latency would.
+These can be video streaming, 3D games, audio streaming, where small losses of packets would not affect the overall experience, however, extra latency would.
 
-This is also why WebRTC uses UDB as its base transport.
+This is also why WebRTC uses UDP as its base transport.
 
 ### Summary
 
@@ -116,7 +116,7 @@ This is also why WebRTC uses UDB as its base transport.
 
 `Increasing TCP's Initial Congestion Window`
 
-Larger starting congestion window allows TCP transfers more data in the first roundtrip and can significantly accelerates the window grwoth - thus, can be critical for short lived connections.
+Larger starting congestion window allows TCP transfers more data in the first roundtrip and can significantly accelerates the window growth - thus, can be critical for short lived connections.
 
 `Slow-start restart`
 
@@ -124,7 +124,7 @@ Disabling slow-start after idle will improve performance of long lived TCP conne
 
 `Window Scaling`
 
-Enabling window scaling increases the maximum receive window size and allows high-latency connections to acheive better throughput
+Enabling window scaling increases the maximum receive window size and allows high-latency connections to achieve better throughput.
 
 `TCP Fast Open`
 
@@ -147,3 +147,34 @@ Read more...
 - position servers close to the client
 
 - reuse established TCP connections when possible
+
+## Chapter 3 - Building blocks of UDP
+
+User Datagram Protocol is a minimalistic transport protocol.
+
+It's known by the features that it omits.
+
+`No guarantee of message delivery`
+
+`No guarantee of order of delivery`
+
+`No connection state tracking`
+
+`No congestion control`
+
+It's mainly used as starting point to build up other protocols and frameworks.
+
+It's simple, stateless protocol which leaves almost all design decisions to application/framework developer. Example framework that uses UDP under the hood is WebRTC.
+
+If you want to leverage UDP for your own application, make sure to research and read about it's limitations. Recommendations for applications:
+
+- Must tolerate wide range of Internet path conditions
+- `should` control the rate of transmission
+- `should perform` congestion control
+- `should` use bandwidth similar to TCP
+- `should` back off retransmission counters following a loss
+- `should` not send datagrams that exceed path MTU
+- `should` handle datagram loss, duplication, and reordering
+- `should` be robust to delivery delays up to 2 mins
+- `should` enable IPv4, and must `enable` IPv6 checksum
+- `may` use keepalives when needed(15 seconds intervals)
