@@ -178,3 +178,133 @@ If you want to leverage UDP for your own application, make sure to research and 
 - `should` be robust to delivery delays up to 2 mins
 - `should` enable IPv4, and must `enable` IPv6 checksum
 - `may` use keepalives when needed(15 seconds intervals)
+
+## Chapter 4 - Transport Layer Security (TLS)
+
+- SSL protocol, initially developed @Netscape.
+
+- It was implemented right on top of TCP, enabling protocols above it such as HTTP, SMTP to have an encrypted communication.
+
+- During standartization of SSL by IETF, it was renamed to TLS, thus naming used interchangeably, but technically they refer to a different version of the protocol.
+
+### Goals
+
+- Encryption
+
+- Authentication
+
+- Data Integrity
+
+### TLS Handshake
+
+Before data can start flowing over TLS, encrypted tunnel must be negotiated. Client and server should agree on a version of TLS, choose a ciphersuite, and verify certificates if necessary. Each of these steps require a rountrip, thus adding `startup latency` to all TLS connections.
+
+Considering an example where 28ms is one way delay between client and server.
+
+- 0ms We wait for TCP handshake to finish, which introduces a full roundtrip
+
+- 56ms Client sends specs in plain text such as TLS protocol version, list of ciphersuites, and other TLS options
+
+- 84ms Server picks the TLS protocol version, decides on ciphersuite from the list, attaches its certificate and sends response back to client.
+
+- 112ms Assuming both sides are able to negotiate on common version and cipher and happy with the certificate provided by the server, client initiates either RSA or the Diffie-Hellman key exchange
+
+- 140ms Server processes the key exchange parameters, checks the message integrity by verifying MAC and returns encrypted "Finished" message back to client
+
+- 168ms Client decrypts the message, verifies the MAC and if all is well, tunnel is established and application data can now be sent.
+
+> Now the data start flowing between client and server
+
+Optimizations should be used alonside such as TLS False Start and TLS Session Resumption in order to avoid having handshake roundtrips on each connection.
+
+### Key exchange algorithms
+
+- RSA
+
+Traditional symmetric key exchange. Slowly being phased out due to vulnerabilities that comes from theft of private key by an attacker.
+
+Read more [here](https://en.wikipedia.org/wiki/RSA_(cryptosystem))
+
+- Diffie-Hellman 
+
+Enables forward secrecy by generation of keys on each exchange. Thus having access to private key on server does not make previous or further exchanges of data vulnerable.
+
+Read more [here](https://en.wikipedia.org/wiki/Diffie%E2%80%93Hellman_key_exchange)
+
+> Public-key cryptography is only used during setup of the TLS tunnel. Further communication uses symmetric-key cryptography due to performance reasons.
+
+### Server Name Indication (SNI)
+
+Encrypted TLS tunnel can be established between any two TCP peers. Only thing client needs to know is the IP address of the server.
+
+What happens when we want to host multiple websites on the same IP address but with different TLS certificates. It doesn't work.
+
+To address this problem, Server Name Indication extension was introduced to TLS so that client can indicate the HOSTNAME at the start of the handshake. In this case, Web Server can inspect the SNI hostname and select appropriate certificate to continue the handshake.
+
+### TLS Record Protocol
+
+First 5 bytes -> Headers(Content-Type, Version, Length)
+
+5..n bytes -> Payload
+
+n..m bytes -> MAC
+
+m..p bytes -> Padding(block cyphers only)
+
+Maximum TLS Record Size is 16KB.
+
+To decrypt/encrypt the record, entire record must be available, thus, picking the right record size is important for optimization.
+
+Optimizations:
+
+- TLS False Start
+
+- Early Termination(CDN, close servers)
+
+- Session caching and stateless resumption
+
+### TLS Compression
+
+Disable, because, it has vulnerabilities and does not differentiate between content types during compression and recompresses already compressed data.
+
+### HTTP Strict Transport Security
+
+Is a security policy mechanism that allows server to declare access rules to a compliant browser via simple HTTP header:
+
+- Strict-Transport-Security: max-age=31536000
+
+It instructs user agent to enforce:
+
+- All requests to the origin should be sent over HTTPs
+  
+- All insecure links and client requests should be converted to HTTPs
+  
+- In case of certificate error, message is displayed to user and it's not allowed to circumvent the warning.
+
+- max-age specifies the lifetime of the specified HSTS ruleset in seconds(in this case 365 days)
+
+Performance-wise it eliminates need to HTTP-HTTPs redirection and delegates this task over to client.
+
+### Performance Chechklist
+
+- Optimize for TCP
+
+- Upgrade TLS libraries
+
+- Enable & configure session caching and stateless resumption
+
+- Configure forward secrecy ciphers to enable TLS False Start.
+
+- Terminate TLS sessions closer to client
+
+- Use dynamic TLS record sizing to optimize for latency and throughput
+
+- Ensure the certificate size does not overflow the initial congestion window to reduce unnecessary rountrips
+
+- Configure OCSP stapling
+
+- Disable TLS compression
+
+- Configure SNI support
+
+- Append HTTP Strict Transport Security header
