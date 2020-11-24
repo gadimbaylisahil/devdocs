@@ -308,3 +308,48 @@ Performance-wise it eliminates need to HTTP-HTTPs redirection and delegates this
 - Configure SNI support
 
 - Append HTTP Strict Transport Security header
+
+## Chapter 9 - Brief History of HTTP
+
+HTTP 0.9 by Tim Berners-Lee. Initial version only consisted of METHOD and PATH which returned simple hypertext document with no headers or metadata.
+
+Features of HTTP 0.9:
+
+- Client-server, request-response protocol
+
+- ASCII protocol, running over TCP/IP link
+
+- Designed to transfer hypertext documents(HTML)
+
+- Connection between client and server is terminated after each request
+
+NGNIX/Apache still supports 0.9 because there isn't much to it.
+
+HTTP 1.0 brought wide adoption and features.
+
+- Request/Response headers and metadata
+  
+- Multiple lines
+  
+- Response is not limited to hypertext
+
+- Connection between server and client closed after each request
+
+HTTP 1.1 brought critical performance optimizations and cleared a lot of ambiguities with earlier versions of HTTP. Such as:
+
+- Connection re-use using keepalives
+
+- Chunked encoding transfers
+
+- Byte-range requests
+
+- Additional caching mechanisms
+
+- Transfer encodings
+
+- Request pipelining
+
+HTTP 2 - retains semantics with improved performance
+
+## Chapter 10 - Primer on Web Performance
+
