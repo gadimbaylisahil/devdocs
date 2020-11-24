@@ -353,3 +353,24 @@ HTTP 2 - retains semantics with improved performance
 
 ## Chapter 10 - Primer on Web Performance
 
+Check the resource waterfall using [webpagetest](http://www.webpagetest.org)
+
+Different browsers implement different logic for when and in which order individual resource requests are dispatched. As a result, the performance of the application also depends on browser.
+
+3 pillars of performance:
+
+- Computing
+
+- Rendering
+
+- Networking
+
+For fetching hunders of small packets/resources, bandwidth doesn't matter(much), as we are bound by latency.
+
+This is even more true wireless/mobile networks where latency vary much greatly.
+
+### Syntetic and real user performance measurement
+
+Identify key performance metrics and set budgets for each of them. Raise an alarm when budget is exceeded.
+
+
