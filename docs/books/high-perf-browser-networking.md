@@ -373,4 +373,112 @@ This is even more true wireless/mobile networks where latency vary much greatly.
 
 Identify key performance metrics and set budgets for each of them. Raise an alarm when budget is exceeded.
 
+Profiling APIs
+
+- User Timing
+- Navigation Timing
+- Resource Timing
+
+### Browser Optimizations
+
+4 techniques employed by most browsers:
+
+- Resource pre-fetching and prioritization
+- DNS pre-resolve
+  Likely hostnames are pre-resolved ahead of time to avoid DNS latency on future HTTP requests
+- TCP pre-connect
+  Following a DNS resolution, browser may speculatevly open a TCP connection in anticipation of an HTTP request
+- Page pre-rendering
+  Some browsers can let us hint the next destination and can pre-render the page for snappy user navigation
+
+For more, see [google performance networking](http://hpbn.co/chrome-networking)
+
+Extra notes:
+
+- Critical resources such as CSS and JS should be discoverable on document as early as possible
+- CSS should be delivered as early as possible to unblock rendering and JS execution
+- Non critical javascript should be `deferred` to avoid blocking DOM CSSOM construction
+- HTML document is parsed incrementally by the parser; thus, it should be periodically flushed for best performance
+
+We can further hint the browser with:
+
+> link rel="dns-prefetch", "subresource", "prefetch", "prerender
+
+## HTTP/1.x
+
+Optimizations and new features:
+
+- Allow connection reuse
+- Chunked transfer encoding to enable streaming
+- Request pipelining to allow parallel request processing
+- Byte serving to allow range-based resource requests
+- Improved and much better-specified caching mechanisms
+...
+
+To keep in mind:
+
+- Reduce DNS lookups
+  Every hostname resolution requires a network roundtrip, imposing latency
+- Make fewer HTTP requests
+- Use CDN
+- Add an Expires header and configure Etags
+  Relevant resources should be cached to avoid re-requesting on each and every page.
+
+> Look for `head-of-line-blocking` both on TCP as well as on servers
+
+### Using multiple TCP connections
+
+Most browsers allow up to 6 connections per HOST.
+
+Limiting the maximum number of TCP connections, browser provides a safety cgecj against the DoS attack. In absence of such limit, client can saturate all available resources on the server.
+
+### Multiplexing
+
+Multiplexing == two way communication.
+
+HTTP 1.x was one way - you could only communicate in one direction at a time(request/response).
+
+### Domain Sharding
+
+To get around the absence of multiplexing, some developers opt in to serve the assets over multiple hosts, to which they can open up-to ~ 6 TCP connections.
+
+Difficult to use workaround.
+
+Shards are CNAME DNS records pointing to the same IP. Browser connection limitations are enforced with respect to HOSTNAME, not the IP.
+
+### Concatenation and Spriting
+
+- Concatenation
+  Multiple JS and CSS files are bundled together into a single resource.
+
+  `Benefits`: Reduced networking overhead, multiple responses over single transfer
+  `Drawbacks`: Not all resources may be needed in initial page load, change in one part of the content would invalidate the whole cache.
+- Spriting
+  Multiple images are combined into a larger, composite image
+  `Benefits`: Same as above ^
+  `Drawbacks`: Extra CSS to handle all these separation, + above ^
+
+### Things to think about
+
+- Is application blocked on many small, individual resources?
+- Can application benefit from selectively combining some requests?
+- Will lost cache granularity affect users?
+- Will combined image assets cause high memory overhead?
+- Will time to first render suffer from delayed execution, and if it's important for the application?
+
+> Consider inlining resources that have sizes between 1-2 KB, as resources below this threshold incur higher HTTP overhead than the resource itself.
+
+Consider Inlining:
+
+- When files are small and limited to specific pages
+
+Consider bundling:
+
+- When small files are often reused between different pages
+
+Keep them separate:
+
+- When small files have high update frequency
+
+Minimize protocol overhead by reducing the size of HTTP cookies
 
