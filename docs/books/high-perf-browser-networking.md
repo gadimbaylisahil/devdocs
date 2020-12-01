@@ -482,3 +482,76 @@ Keep them separate:
 
 Minimize protocol overhead by reducing the size of HTTP cookies
 
+## HTTP 2.0
+
+Primary goals were:
+
+- Reduce latency by request multiplexing(bi directional flow)
+- Minimize protocol overhead by compressing HTTP headers
+- Add support for server prioritization and server push
+
+### Binary Framing
+
+HTTP/2 uses binary framing for HEADERS/DATA in comparison with HTTP/1 which
+used just ASCII.
+
+Latter is less performant but easier to inspect. For HTTP/2 inspection, you would need
+a tool such as Wireshark.
+
+### Multiplexing
+
+HTTP/1's drawback was that only one response could've been delivered at a time per connection. HTTP/2 eliminates this by allowing multiple requests and responses over a single connection. This removes the need for concatenated files, image sprites, and domain sharding for asset delivery over multiple hosts(to go around the 6 connection limit per HOST).
+
+### Stream Prioritization
+
+Client can hint each request's priority to server by assigning an integer value between 1-256, as well as to
+define any dependencies between streams, allowing server to process what is most important first.
+
+### Server Push
+
+With HTTP/2 servers now can send multiple responses/resources to the client, without receiving any requests. For instance, when client reads an HTML response, it will be requesting additional resources such as CSS and JS, but server already knows that, thus pushes those to client ahead of the time.
+
+Client may opt out of these, in case it already cached those resources or it simply doesn't want them. To avoid unnecessary pushes, server first sends PUSH_PROMISE frame, which contains HTTP headers for the resource. If client wants them, it will be followed by the DATA frames, which will contain the resources.
+
+This eliminates the need to `inlining` resources in HTTP/1, a popular optimization technique to avoid waiting for the request from client to response with those resources.
+
+Difference is that in HTTP/1, this was a `forced push`, which client had no way to decline.
+
+### Header Compression
+
+HTTP/2 brought header compression to which in HTTP/1 the plain text headers resulting in 500-800 bytes of overhead per each request, sometimes in kilobytes when cookies were in use.
+
+HTTP/2 uses HPACK compression format.
+
+### Example negotiation
+
+
+```http
+GET /page HTTP/1.1
+Host: server.example.com
+Connection: Upgrade, HTTP2-Settings
+Upgrade: h2c (1)
+HTTP2-Settings: (SETTINGS payload) (2)
+
+HTTP/1.1 200 OK (3)
+Content-length: 243
+Content-type: text/html
+
+(... HTTP/1.1 response ...)
+
+          (or)
+
+HTTP/1.1 101 Switching Protocols (4)
+Connection: Upgrade
+Upgrade: h2c
+
+(... HTTP/2 response ...)
+```
+
+1. Initial HTTP/1.1 request with HTTP/2 upgrade header
+
+2. Base64 URL encoding of HTTP/2 SETTINGS payload
+
+3. Server declines upgrade, returns response via HTTP/1.1
+
+4. Server accepts HTTP/2 upgrade, switches to new framing
