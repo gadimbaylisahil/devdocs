@@ -513,6 +513,8 @@ With HTTP/2 servers now can send multiple responses/resources to the client, wit
 
 Client may opt out of these, in case it already cached those resources or it simply doesn't want them. To avoid unnecessary pushes, server first sends PUSH_PROMISE frame, which contains HTTP headers for the resource. If client wants them, it will be followed by the DATA frames, which will contain the resources.
 
+> HTTP PUSH is dead https://evertpot.com/http-2-push-is-dead/
+
 This eliminates the need to `inlining` resources in HTTP/1, a popular optimization technique to avoid waiting for the request from client to response with those resources.
 
 Difference is that in HTTP/1, this was a `forced push`, which client had no way to decline.
