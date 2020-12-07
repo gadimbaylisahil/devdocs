@@ -557,3 +557,53 @@ Upgrade: h2c
 3. Server declines upgrade, returns response via HTTP/1.1
 
 4. Server accepts HTTP/2 upgrade, switches to new framing
+
+## Chapter 13 - Optimizing Application Delivery
+
+As we can reduce the latency, its crucial we make optimizations at transport and application layers, to eliminate unnecessary roundtrips, requests, and minimize the distance that needs to be travelled for each packet(positioning servers closer to the client).
+
+> Optimize TLS and TCP on servers, try to run the latest versions and make configurations changes according to best practices.
+
+Use APMs, measure and assign tasks depending on business goals, treating performance as a `feature`.
+
+### Evergreen performance best practices
+
+1. Reduce DNS lookups
+2. Reuse TCP connections
+3. Minimize number of HTTP redirects(best is 0)
+4. Reduce rountrip times
+   Locate servers closer to client
+5. Eliminate unnecessary resources or reduce them
+   Caching resources on client
+   Compress assets during transfer
+   Eliminate unnecessary request bytes(cookies)
+   Parallelize request and response processing
+   Apply protocol specific-optimizations
+6. Careful with cookies(don't use them wherever possible) See `cookie-free` origin
+7. Compress js/css(gzip) & images
+
+#### Caching resources on client
+
+- Cache-Control header to specify the cache lifetime(max-age)
+
+- Last-Modified and ETag headers to provide validation mechanisms
+
+> Provide both ^ together
+
+### Optimizing for HTTP/2
+
+HTTP/2 enables more efficient use of network resources with help of request/response multiplexing, header compression, prioritization and more.
+
+HTTP/2, especially with its `one request per origin` requires well tuned TCP/TLS optimization.
+
+Eliminate HTTP/1.x workarounds, such as domain sharding, concatenation and image spriting.
+
+### Test HTTP/2 server quality
+
+Naive implementation of an HTTP/2 server, or proxy that speaks the procotol, but without implementing support for features such as flow control and request prioritization, may result in less efficient transport of data.
+
+For instance, it may result in saturating client's bandwidth by sending large low priority resources while client is blocked from rendering the page until it receives higher priority resources such as HTML, CSS, JS.
+
+However, there may also be a case, where `resource A` has high priority but slow response may block `resource B` which would've been sent much faster(head-of-line-blocking).
+
+Thus, a well implemented server should give priority to high priority resources while also interleave lower priority streams if all higher priority streams are blocked.
