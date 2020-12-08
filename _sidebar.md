@@ -2,9 +2,10 @@
 
   - [Command Line](docs/linux/command-line.md)
 
-- Cheatsheet
+- Multitenancy
 
   - [Move data from separate DB into Schema](docs/cheatsheet/db-to-schema-move.md)
+  - [Apartment gem and streaming downloads](docs/multitenancy/apartment-and-streaming.md)
 
 - Book notes
 

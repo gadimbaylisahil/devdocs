@@ -417,11 +417,11 @@ Optimizations and new features:
 
 To keep in mind:
 
-- Reduce DNS lookups
+- Reduce DNS lookups  
   Every hostname resolution requires a network roundtrip, imposing latency
 - Make fewer HTTP requests
 - Use CDN
-- Add an Expires header and configure Etags
+- Add an Expires header and configure Etags  
   Relevant resources should be cached to avoid re-requesting on each and every page.
 
 > Look for `head-of-line-blocking` both on TCP as well as on servers
