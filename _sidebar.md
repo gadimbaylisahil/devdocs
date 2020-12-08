@@ -4,12 +4,12 @@
 
 - Multitenancy
 
-  - [Move data from separate DB into Schema](docs/cheatsheet/db-to-schema-move.md)
+  - [Move data from separate DB into Schema](docs/multitenancy/db-to-schema-move.md)
   - [Apartment gem and streaming downloads](docs/multitenancy/apartment-and-streaming.md)
 
 - Book notes
 
-  - [High Performance Browser Networking](docs/books/high-perf-browser-networking.md)
+  - [High Performance Browser Networking](docs/books/high-performance-browser-networking/index.md)
 
 - Cast notes
 

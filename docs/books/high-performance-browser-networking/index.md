@@ -1,3 +1,5 @@
+# High Performance Browser Networking
+
 ## Chapter 1 - Primer on Latency and Bandwidth
 
 `Latency`
@@ -404,7 +406,7 @@ We can further hint the browser with:
 
 > link rel="dns-prefetch", "subresource", "prefetch", "prerender
 
-## HTTP/1.x
+## Chapter 11 - HTTP/1.x
 
 Optimizations and new features:
 
@@ -482,7 +484,7 @@ Keep them separate:
 
 Minimize protocol overhead by reducing the size of HTTP cookies
 
-## HTTP 2.0
+## Chapter 12 - HTTP 2.0
 
 Primary goals were:
 
