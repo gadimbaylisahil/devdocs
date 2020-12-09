@@ -14,7 +14,7 @@ Always filter and verify the user supplied parameters. However, add database lev
 
 Examples:
 
-```SQL
+```sql
 ALTER TABLE users ADD CONSTRAINT check_valid_role_state CHECK ( role IN ('admin', 'superadmin', 'regular'))
 
 ALTER TABLE invoices ADD CONSTRAINT check_valid_amount CHECK (amount >= 0 AND amount <= 1000000 )
