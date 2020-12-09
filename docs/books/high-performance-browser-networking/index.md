@@ -609,3 +609,89 @@ For instance, it may result in saturating client's bandwidth by sending large lo
 However, there may also be a case, where `resource A` has high priority but slow response may block `resource B` which would've been sent much faster(head-of-line-blocking).
 
 Thus, a well implemented server should give priority to high priority resources while also interleave lower priority streams if all higher priority streams are blocked.
+
+## XMLHttpRequest
+
+### History
+
+It really doesn't have anything to do with XML. When it was shipped in Microsoft, it was developed with the help of MSXML team, thus, name was stuck.
+
+Initial version was limited:
+
+- Text based data transfers only
+- Restrictred support for handling uploads
+- No cross-domain requests
+
+Later, a new draft for `XMLHttpRequest Level 2` addressed these limitations by offering:
+
+- Support for timeouts
+- Support for binary and test-based data transfers
+- Support for application override of media type and encoding of response
+- Support for monitoring progress of evens of each request
+- Support for efficient file uploads
+- Support for safe cross-origin requests
+
+### CORS (Cross-Origin Resource Sharing)
+
+While XHR API allows client to add custom HTTP headers via `setRequestHeader()`, there are number of protected
+headers that are off-limits to application code:
+
+- Accept-Charset, Accept-Encoding, Access-Control-*
+- Host, Upgrade, Connection, Referer, Origin
+- Cookie, Sec-*, Proxy-* and others...
+
+This guarantees that the application cannot impersonate a fake user-agent, user or origin...
+
+By default requests are set `same origin` due to security. Otherwise, arbitrary scripts can access
+data on the server that is hosting the application.
+
+However, there are cases when server would like to offer a resource to a script running in a different origin. This is where `CORS` comes in.
+
+- When request is made, browser is automatically adds the `Origin`(http://example.com) header
+- In return, server responds with 
+
+```http
+<=Response
+
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://example.com
+```
+
+- If server would skip the `Access-Control-Allow-Origin`, the request on the client side would fail.
+
+> Never return Access-Control-Allow-Origin: * due to security implications
+
+Is this it? No, CORS makes other precautions such as omitting credentials such as cookies and HTTP authentication. There are other headers for allowing them on server side such as `Access-Control-Allow-Credentials`
+
+Similarly, if client would like to read/write custom HTTP headers, it may issue a preflight request(OPTION) as below:
+
+```http
+OPTIONS /resource.js HTTP/1.1
+Host: http://thirdparty.com
+Origin: http://example.com
+Access-Control-Request-Method: POST
+Access-Control-Request-Headers: My-Custom-Header
+
+<= Response from server>
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: http://example.com
+Access-Control-Allow-Methods: GET, POST, PUT
+Access-Control-Allow-Headers: My-Custom-Header
+
+<= Actual request starts...>
+```
+
+#### Monitoring XHR progress
+
+XMLHttpRequest provides events to monitor the request:
+
+- loadstart - transfer has begun (1)
+- progress - transfer is in progress (0+)
+- error - transfer has failed (0+)
+- abort - transfer has been terminated(0+)
+- load - transfer is successful(0+)
+- loadend - transfer is finished(1)
+
+Streaming support in XHR is limited, look for better options SSE(Server Sent Events), WebSockets...
+
+Be mindful when going with polling mechanism, evaluate your application requirements and decide if it is a correct solution.
