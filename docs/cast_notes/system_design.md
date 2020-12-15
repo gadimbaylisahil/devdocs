@@ -8,7 +8,7 @@ Data is more important than code, thus, we have to keep its integrity in check.
 
 Make boolean columns not nullable with some default value set. Otherwise, you will have issues to remember to consider the `nullability` when querying every time.
 
-## Data constraints at DB level
+## Data constraints
 
 Always filter and verify the user supplied parameters. However, add database level constraints as well.
 
