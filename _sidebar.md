@@ -7,6 +7,10 @@
   - [Move data from separate DB into Schema](docs/multitenancy/db-to-schema-move.md)
   - [Apartment gem and streaming downloads](docs/multitenancy/apartment-and-streaming.md)
 
+- Ruby
+
+  - [Ruby](docs/ruby/index.md)
+
 - Book notes
 
   - [High Performance Browser Networking](docs/books/high-performance-browser-networking/index.md)
