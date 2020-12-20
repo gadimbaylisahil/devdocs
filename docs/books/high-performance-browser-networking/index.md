@@ -695,3 +695,96 @@ XMLHttpRequest provides events to monitor the request:
 Streaming support in XHR is limited, look for better options SSE(Server Sent Events), WebSockets...
 
 Be mindful when going with polling mechanism, evaluate your application requirements and decide if it is a correct solution.
+
+## Server Sent Events (SSE)
+
+Server Sent Events enables efficient server-client streaming of text based event data, e.g., real-time notifications or updates generated on server.
+
+This is achieved by EventSource API built inside browsers, which allows clients to receive notifications from the server as DOM events, in `event stream` data format.
+
+This enables much simpler and efficient communication in the browser vs XHR and its manual handling.
+
+- Low latency delivery via single, long-lived HTTP connection
+- Efficient browser message parsing with no unbounded buffers
+- Automatic tracking of last seen events and auto reconnect
+- Client message notifications as DOM events
+
+Example of EventSource usage:
+
+```javascript
+var source = new EventSource("path/to/stream-url")
+
+source.onload = function {}
+source.onerror = function {}
+
+source.addEventListener("foo", function {
+  ...some-custom-logic-on-foo-event
+});
+
+source.onmessage = function(event) {
+  log_message(event.id, event.data)
+
+  if (event.id == "CLOSE") {
+    source.close();
+  }
+}
+```
+
+SSE provides a memory-efficient implementation of XHR streaming. Unlike raw XHR connection, which buffers the full received response until the connection is dropped, an SSE alternative can discard the processed response without accumulating all of them into memory.
+
+### Event-Stream protocol
+
+SSE event stream is delivered as streaming HTTP response. Client initiates an HTTP request and the server responds with a custom `test/event-stream` content-type, streaming UTF-8 encoded event data.
+
+Example:
+
+```http
+=> Request
+
+GET /stream HTTP/1.1
+HOST: example.com
+Accept: test/event-stream
+
+=> Response
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Type: text/event-stream
+Transfer-Encoding: chunked
+
+# 15 seconds retry time on dropped requests
+retry: 15000
+
+data: Some text based data
+
+data: {"message": "Some Json payload"}
+
+event: foo
+data: Some data which is associated with event foo
+
+id: 42
+event: bar
+data: Some data which has id of 42 and is associated with bar event
+
+id: 43
+data: Generic event with id of 43
+```
+
+- Event payload is one of group of adjacent data fields
+- Responses are separated by an empty line in between
+- Events may carry an optional ID and event type string
+
+Event-Source API is designed for a simple text based data transfer. However, as it supports and transferred over HTTP, it's capable of compression. Thus transferring binary data encoded in base64(with 33% byte overhead), is still doable, though, inefficient.
+
+For binary transfers, WebSockets would be much more suitable.
+
+> SSE is a high-performance transport for server-to-client streaming of text based real-time data; messages can be pushed at the moment they are made available at the server. There is minimum message overhead(long-lived connections, event-stream protocol, gzip compression), and the browser handles all the message parsing and auto reconnect.
+
+Two limitations:
+
+- Only from server to client, thus no way to stream requests
+- Specifically designed for UTF-8 data. Binary transfers even though possible, is inefficient.
+
+> Be mindful about long lived connections, eliminate unnecessary ones to avoid putting a strain on resources at the client side and of the physical devices(such as battery)
+
+Possible issues may arise from intermediaries such as firewalls, web proxies where the communication can break. Considering delivering an SSE event-stream over a TLS connection.
+
