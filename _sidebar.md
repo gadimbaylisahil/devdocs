@@ -11,6 +11,10 @@
 
   - [Ruby](docs/ruby/index.md)
 
+- Performance
+
+  - [Rails](docs/performance/rails.md)
+
 - Book notes
 
   - [High Performance Browser Networking](docs/books/high-performance-browser-networking/index.md)
