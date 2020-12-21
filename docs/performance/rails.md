@@ -99,3 +99,56 @@ Unline ruby-prof, [stackprof](https://github.com/tmm1/stackprof) uses sampling t
 In tracing profiler such as ruby-prof, profiler hooks into every method invocation and tries to measure the execution time, which makes it accurate but slow.
 
 In sampling profiler not every occurrence is measured, but every N occurrence of the event, thus, not resulting in performance issues in profiler itself.
+
+> Use profiler such as ruby-prof to test the boot time of your application. Where does the time go?
+
+## Rack mini profiler
+
+[Rack mini profiler](https://github.com/MiniProfiler/rack-mini-profiler) is a performance tool for rack applications.
+
+Provides entire suite of performance tools for rack based ruby web applications which is also suitable to run on `production`.
+
+Run application in production environment settings with production like data size.
+
+You can also activate rack-mini-profiler in production with a call-back in controllers such as:
+
+```ruby
+before_filter :check_rack_mini_profiler
+def check_rack_mini_profiler
+  # for example - if current_user.admin?
+  if params[:rmp]
+    Rack::MiniProfiler.authorize_request
+  end
+end
+```
+
+It's also better not to use default disk storage for rack-mini-profiler and use `in-memory` storage instead.
+
+`Rack::MiniProfiler.config.storage = Rack::MiniProfiler::MemoryStore`
+
+rack-mini-profiler adds a speed badge to the page from which we can view the total spent time on partials, queries etc...
+
+### Flamegraphs
+
+Add `?pp=flamegrahp` to see flamegrahps.
+
+Works alongside with `flamegraph` gem.
+
+### GC stats
+
+Add `?pp=profile-gc` to enable memory profiling. Output is the output of `GC.stat`.
+
+Watch out for pages that generates abnormally high values for memory(10MB+). You can detailed string allocations. Perhaps, look and froze strings that get allocated 100s, 1000s of times...
+
+See [commit](https://github.com/rack/rack/commit/dc53a8c26dc55d21240233b3d83d36efdef6e924)
+
+### Profile memory
+
+Add `?pp=profile-memory`. This is a `premium` version of `profile-gc`. Instead of telling us what strings were allocated, it tells us `where`.
+
+It works alongside with `memory_profiler` gem.
+
+## Exceptions for control flow
+
+Exceptions in ruby are [32X slower](https://simonecarletti.com/blog/2010/01/how-slow-are-ruby-exceptions/)
+
