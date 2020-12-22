@@ -276,9 +276,37 @@ Not all memory statistics will be accurate. Due to memory fragmentation over tim
 
 > Use memory_profiler when manually instrumenting certain piece of code, such as in background jobs. For the rest, prefer rack-mini-profiler or derailed
 
-## Checklist
+### Checklist
 
 - Perform audit of the gemfile using derailed benchmarks, to asses boot time memory usage brought by dependencies
 - Experiment with ObjectSpace and write your own logging code to identify hotspots for memory
 - Use memory_profiler alongside with rack-mini-profiler to activate it's memory functionalities
+
+## Benchmarks Folder
+
+You may opt in to have a `bechmarks` folder in your application repo such as [jekyll does](https://github.com/jekyll/jekyll/tree/master/benchmark).
+
+Also see [Minitest::Benchmark](https://chriskottom.com/blog/2015/04/minitest-benchmark-an-introduction/)
+
+## Load testing tools
+
+### WRK
+
+```bash
+wrk
+
+HTTP benchmarking tool.
+More information: https://github.com/wg/wrk.
+
+- Run a benchmark for 30 seconds, using 12 threads, and keeping 400 HTTP connections open:
+  wrk -t12 -c400 -d30s "http://127.0.0.1:8080/index.html"
+
+- Run a benchmark with a custom header:
+  wrk -t2 -c5 -d5s -H "Host: example.com" "http://example.com/index.html"
+
+- Run a benchmark with a request timeout of 2 seconds:
+  wrk -t2 -c5 -d5s --timeout 2s "http://example.com/index.html"
+```
+
+Look into [loader.io](https://loader.io)
 
