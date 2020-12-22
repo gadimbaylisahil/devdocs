@@ -152,3 +152,133 @@ It works alongside with `memory_profiler` gem.
 
 Exceptions in ruby are [32X slower](https://simonecarletti.com/blog/2010/01/how-slow-are-ruby-exceptions/)
 
+## Memory Profiling
+
+Memory profiling tools are usually bound to the VM the language operates in. For the CPU profiling, generic tools such as Google's perftools can be used.
+
+Several tools for ruby to profile memory:
+
+- `ObjectSpace` module
+- `GC::Profiler` module in stdlib
+- [gc_tracer](https://github.com/ko1/gc_tracer)
+- [derailed_benchmarks](https://github.com/schneems/derailed_benchmarks)
+- [memory_profiler](https://github.com/SamSaffron/memory_profiler)
+
+### ObjectSpace
+
+```ruby
+ObjectSpace.count_objects
+
+{
+ :TOTAL=>132882,
+ :FREE=>49002,
+ :T_OBJECT=>10011,
+ :T_CLASS=>2010,
+ :T_MODULE=>145,
+ :T_FLOAT=>4,
+ :T_STRING=>33066,
+ :T_REGEXP=>704,
+ :T_ARRAY=>17848,
+ :T_HASH=>1000,
+ :T_STRUCT=>39,
+ :T_BIGNUM=>2,
+ :T_FILE=>4,
+ :T_DATA=>1467,
+ :T_MATCH=>2,
+ :T_COMPLEX=>1,
+ :T_RATIONAL=>1,
+ :T_SYMBOL=>49,
+ :T_IMEMO=>17234,
+ :T_ICLASS=>293
+}
+```
+
+You can optionally `require 'objspace'`(on development only, as it will slow down your app due to tracing).
+
+This will add some convenience methods such as:
+
+```ruby
+# Shows how much memory each object type is using
+ObjectSpace.count_objects_size
+
+# Displays how much memory used by [1000x...:a]
+ObjectSpace.memsize_of(Array.new(1000) { :a })
+
+# Shows memory used by specific class
+ObjectSpace.memsize_of_all(String)
+```
+
+Use object space to enhance knowledge in ruby memory usage, build mini benchmark/profile tools that suit your needs.
+
+### GC
+
+```ruby
+GC.disable
+
+GC.enable
+
+GC.start
+```
+
+#### GC Profiler
+
+```ruby
+GC::Profiler.enable
+
+require 'set'
+
+GC.start
+
+GC::Profiler.report
+GC::Profiler.disable
+```
+
+Invocation counts are since the process boot, not during the profiling state.
+
+When tools points you towards GC running often or taking long time, use profilers.
+
+### GC Tracer
+
+An extension to GC::Profiler, which can log the memory usage into files/html, hooked into Rack middleware.
+
+```ruby
+gem 'gc_tracer', require: 'rack/gc_tracer'
+
+Rails.application.middleware.use Rack::GCTracerMiddleware, view_page: '/gc_tracer', filename: 'log/gc_tracer'
+
+# Custom instrumentation
+
+GC::Tracer.start_logging do
+  some_awful_code
+end
+```
+
+Prefer to use this in development to track down memory leaks.
+
+### Derailed Benchmarks
+
+Use derailed benchmarks to monitor boot time memory load of gems and memory leaks
+
+### Memory Profiler
+
+```ruby
+require 'memory_profiler'
+
+MemoryProfiler.report do 
+  # some block of code
+end.pretty_print
+
+# Total allocated: 914156 bytes (8503 objects)
+# Total retained:  46834 bytes (645 objects)
+```
+
+Not all memory statistics will be accurate. Due to memory fragmentation over time, `memory_profiler` will be underestimating versus what you might see in the process's memory usage using `ps`.
+
+> Use memory_profiler when manually instrumenting certain piece of code, such as in background jobs. For the rest, prefer rack-mini-profiler or derailed
+
+## Checklist
+
+- Perform audit of the gemfile using derailed benchmarks, to asses boot time memory usage brought by dependencies
+- Experiment with ObjectSpace and write your own logging code to identify hotspots for memory
+- Use memory_profiler alongside with rack-mini-profiler to activate it's memory functionalities
+
