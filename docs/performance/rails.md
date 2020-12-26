@@ -310,3 +310,39 @@ More information: https://github.com/wg/wrk.
 
 Look into [loader.io](https://loader.io)
 
+### Apache Benchmark
+
+```bash
+ab
+
+Apache Benchmarking tool. The simplest tool to perform a load testing.
+More information: https://httpd.apache.org/docs/2.4/programs/ab.html.
+
+- Execute 100 HTTP GET requests to a given URL:
+  ab -n 100 url
+
+- Execute 100 HTTP GET requests, processing up to 10 requests concurrently, to given URL:
+  ab -n 100 -c 10 url
+
+- Use keep alive:
+  ab -k url
+
+- Set the maximum number of seconds to spend for benchmarking:
+  ab -t 60 url
+
+- Execute 100 HTTP POST requests to a given URL, using a JSON payload from a file:
+  ab -n 100 -T application/json -p data.json url
+```
+
+## Little's law & application instances & requests per second
+
+Little's law is not a 'set in stone` calculation for how many app instances you need but can be a good indicator of overscaling/underscaling.
+
+Example:
+
+Let's say your average response time is 0.3 seconds and you are running 4 application instances. Theoretically this would mean your application can process (4 / 0.3) = 13 requests per second, or the other way (13 requests * 0.3) ~= 4 application instances that you need.
+
+It would be wise to be in that ratio of 2/1. If these are your stats ^ operate with 8 instances at 50% utilization.
+
+- 95th percentil response times should be within 4:1 ratio of average time required for particular controller
+- No controller action's average response time should be more than 4 times of average response time of the application

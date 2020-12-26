@@ -14,6 +14,7 @@
 - Performance
 
   - [Rails](docs/performance/rails.md)
+  - [Frontend](docs/performance/frontend.md)
 
 - Book notes
 
