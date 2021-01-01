@@ -562,7 +562,7 @@ Upgrade: h2c
 
 ## Chapter 13 - Optimizing Application Delivery
 
-As we can reduce the latency, its crucial we make optimizations at transport and application layers, to eliminate unnecessary roundtrips, requests, and minimize the distance that needs to be travelled for each packet(positioning servers closer to the client).
+As we can't reduce the latency, its crucial we make optimizations at transport and application layers, to eliminate unnecessary roundtrips, requests, and minimize the distance that needs to be travelled for each packet(positioning servers closer to the client).
 
 > Optimize TLS and TCP on servers, try to run the latest versions and make configurations changes according to best practices.
 
@@ -625,7 +625,7 @@ Initial version was limited:
 Later, a new draft for `XMLHttpRequest Level 2` addressed these limitations by offering:
 
 - Support for timeouts
-- Support for binary and test-based data transfers
+- Support for binary and text-based data transfers
 - Support for application override of media type and encoding of response
 - Support for monitoring progress of evens of each request
 - Support for efficient file uploads
