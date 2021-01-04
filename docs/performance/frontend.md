@@ -120,3 +120,21 @@ Prerender is prefetch on steroids -- it will actually download the whole page. T
 - Reduce number of connections
 - HTTP caching is great, but don't rely on particular resource being cached
 - Use resource hints -- particularly `preconnect` and `prefetch`
+- Use turbolinks, pjax approach or SPA
+- Most pages should not have more than a few thousand DOM elements `at most`
+- Look for `layout trash` using Chrome Timeline
+- Be mindful about adding `$('el').on('click', {})` event listeners
+
+## Reflow
+
+Be mindful about reflow and repaint.
+
+Browsers will need to reflow/repaint portions or the full page in case there are changes to CSSOM.
+
+Reasons for reflow:
+
+- Adding stylesheets(second ones)
+- Manipulating classes of elements and changing style attributes.
+- Calculating certain numbers, like elem.offsetLeft.
+
+See actions in which reflow is executed [here](https://gist.github.com/paulirish/5d52fb081b3570c81e3a)

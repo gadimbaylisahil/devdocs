@@ -15,6 +15,7 @@
 
   - [Rails](docs/performance/rails.md)
   - [Frontend](docs/performance/frontend.md)
+  - [HTTP Caching](docs/performance/http-caching.md)
 
 - Book notes
 
