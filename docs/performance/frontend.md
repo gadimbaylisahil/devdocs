@@ -68,5 +68,55 @@ Add `async` tag to external scripts in use, that is not required in page renderi
 
 Add `defer` for compatibility with IE9<. See differences between async and defer [here](https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html)
 
+## HTTP Caching & assets
 
+- Mobile cache sizes are small 100-500MB
+- Using CDNs for all external assets -- while good idea in theory -- would imply that your users would have all your assets cached somehow to get considerable performance gains, if not, this would lead to extra connections, which are expensive. We are better of with concatenation and using single application.js over a connection that will be reused.
 
+## Resource Hints
+
+There are various hints we can give to browsers to improve perceived speed. These may or may not be acted upon depending on the our browser's support.
+
+### DNS Prefetch, Preconnect, Prefetch, Prerender
+
+`Preconnect`
+
+```html
+<!-- 
+
+    Resolve the DNS, if not done already (1 round-trip)
+    Open a TCP connection (1.5 round-trips)
+    Complete a TLS handshake if the connection is HTTPS (2-3 round-trips)
+
+ -->
+<link rel="preconnect" href="//example.com">
+```
+
+> Only thing it wouldn't do is to download the resource.
+
+`Prefetch`
+
+```html
+<!-- 
+
+    Everything that we did to set up a connection in the preconnect hint (DNS/TCP/TLS).
+    But in addition, the browser will also actually download the resource.
+    However, prefetch only works for resources required by the next navigation, not for the current page.
+
+ -->
+<link rel="prefetch" href="//example.com/some-image.gif">
+```
+
+> Consider using prefetch in any case where you have a good idea what the user might do next.
+
+`Prerender`
+
+Prerender is prefetch on steroids -- it will actually download the whole page. This means prerendering works on HTML documents -- not on scripts or sub-resources.
+
+> Be careful when using prefetch and prerender together. If you’re prefetching something on your own server, you’re effectively adding another request to your server load for every prefetch directive. A prerender directive can be even more load-intensive because the browser will also fetch all sub resources (CSS/JS/images, etc), which may also come from your servers. It’s important to only use prerender and prefetch where you can be pretty certain a user will actually use those resources on the next navigation.
+
+### Checklist 2
+
+- Reduce number of connections
+- HTTP caching is great, but don't rely on particular resource being cached
+- Use resource hints -- particularly `preconnect` and `prefetch`
