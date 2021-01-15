@@ -14,19 +14,19 @@ This post covers most of the practical stuff I need regarding UNIX I/O and Ruby'
 
 1. Add sheebang
 
-```ruby
-#!/usr/bin/env ruby
+    ```ruby
+    #!/usr/bin/env ruby
 
-...your script
-```
+    ...your script
+    ```
 
 2. Make it executable
 
-`chmod +x bin/yourscript`
+    `chmod +x bin/yourscript`
 
 3. Add to PATH
 
-export PATH=/path/to/script/folder:$PATH
+    export PATH=/path/to/script/folder:$PATH
 
 ### ARGV object: for collecting parameters
 
