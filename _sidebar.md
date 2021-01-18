@@ -20,6 +20,7 @@
 - Book summaries
 
   - [High Performance Browser Networking](docs/books/high-performance-browser-networking/index.md)
+  - [How Linux Works](docs/books/how-linux-works/index.md)
 
 - Stuff from screencasts
 
