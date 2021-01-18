@@ -115,3 +115,9 @@ require 'open3'
 
 command_stdout, command_stderr, command_status = Open3.capture3('command --someoption')
 ```
+
+### Assignment: `ls` clone in ruby
+
+Assignment Description [here](https://github.com/elm-city-craftworks/course-001/blob/master/PART_1.md)
+
+My implementation source code [here](https://github.com/gadimbaylisahil/ruby-ls-clone/blob/main/ruby-ls)
