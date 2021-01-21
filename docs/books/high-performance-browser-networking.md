@@ -311,6 +311,7 @@ Performance-wise it eliminates need to HTTP-HTTPs redirection and delegates this
 
 - Append HTTP Strict Transport Security header
 
+
 ## Chapter 9 - Brief History of HTTP
 
 HTTP 0.9 by Tim Berners-Lee. Initial version only consisted of METHOD and PATH which returned simple hypertext document with no headers or metadata.

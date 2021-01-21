@@ -7,7 +7,7 @@
   - [Testing](docs/ruby/testing.md)
 
 - Performance
-
+  - [Active Record](docs/performance/active-record.md)
   - [Rails: Profiling and Benchmarking](docs/performance/rails.md)
   - [Frontend: Stuff to care over front battleground](docs/performance/frontend.md)
   - [HTTP Caching](docs/performance/http-caching.md)
@@ -19,9 +19,15 @@
 
 - Book summaries
 
-  - [High Performance Browser Networking](docs/books/high-performance-browser-networking/index.md)
-  - [How Linux Works](docs/books/how-linux-works/index.md)
+  - [High Performance Browser Networking](docs/books/high-performance-browser-networking)
+  - [How Linux Works](docs/books/how-linux-works)
+  - [Rails Performance Apocrypha](docs/books/rails-performance-apocrypha)
+
+- Coursera
+
+  - [Understanding Financial Markets](docs/coursera/understanding-financial-markets)
 
 - Stuff from screencasts
 
   - [System Design](docs/cast_notes/system_design.md)
+  - [SEO](docs/cast_notes/seo.md)
