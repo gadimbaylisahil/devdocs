@@ -101,5 +101,59 @@ D: By doing this computation, you assess the relative frequency of observing a r
 
 https://www.vanguard.co.uk/documents/portal/literature/investment-fundamentals-guide.pdf
 
+Work out what you want out of your investments and the timeframe you want to invest.
+
+Identify your needs:
+
+Growth: Designed to provide most of their returns as capital growth. Such as, real estate, international equities...
+
+Income: Designed to provide low but stable income. Such as bonds, cash investments and certain other equities.
+
+Possible costs:
+
+- *Initial Charge* to fund manager for absorbing the investment into a portfolio - a percentage of the initial investment
+- *Exit fee* to fund management companies
+- *Annual Management Charge*
+- *Ongoing charges figure*
+- *Stamp Duty Reserve Tax*
+
+Asset Allocation:
+
+Deciding how to spread your money across different types of assets, such as, equities, bonds, property or cash.
+
+Equities:
+
+Also called shares or stocks represents ownership in a given company.
+
+Bonds:
+
+A loan made to the bond's issuer. Can be a company, government or some other institution. Bonds offer stable fixed interest rate returns -- usually paid out twice a year. Can be useful in a portfolio with fixed payments to have some reassurance when equity prices fall.
+
+Types of bonds:
+
+- Government bonds -- such as Gilts from UK. These are perceived as `no risk` by default, thus pays very low interest rates.
+- Coorporate bonds -- companies also issue bonds. These provide credit for the company for their day to day operations, avoiding selling shares or reaching for the bank for a loan. Creditworthyness of a company for their bonds are assessed just like individuals. Of course, stable companies with lower risk offer low percentage bonds, while high risk companies issue high interest rate bonds.
+
+Property:
+
+Home ownership or a commercial exposure through property fund.
+
+Cash Investments:
+
+Deposits in the bank for fixed interest rate.
+
+Different types of pooled funds:
+
+- Unit Trust
+- OEIC(Open Ended Investment Company)
+- Investment Trust
+- Exchange traded funds
+
+Active Managers: aim to beat the return of the market index or benchmark
+Passive Managers: aim to replicate the market index or benchmark
+
+
+
+
 http://people.stern.nyu.edu/adamodar/New_Home_Page/background/portmgmt.htm
 

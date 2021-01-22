@@ -19,13 +19,13 @@
 
 - Book summaries
 
-  - [High Performance Browser Networking](docs/books/high-performance-browser-networking)
-  - [How Linux Works](docs/books/how-linux-works)
-  - [Rails Performance Apocrypha](docs/books/rails-performance-apocrypha)
+  - [High Performance Browser Networking](docs/books/high-performance-browser-networking.md)
+  - [How Linux Works](docs/books/how-linux-works.md)
+  - [Rails Performance Apocrypha](docs/books/rails-performance-apocrypha.md)
 
 - Coursera
 
-  - [Understanding Financial Markets](docs/coursera/understanding-financial-markets)
+  - [Understanding Financial Markets](docs/coursera/understanding-financial-markets.md)
 
 - Stuff from screencasts
 
