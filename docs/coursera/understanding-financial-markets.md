@@ -55,3 +55,51 @@ Strategic Asset Allocation:
 - Market volatility
 - Market Valuation
 
+### Role of financial markets
+
+Participants:
+
+- Firms
+- Investors
+- Government
+- Financial Intermediaries(chain of brokers, institutions, exchanges)
+
+### Several ways of managing risk
+
+- By diversifying their investments, investors reduce the overall risk of their portfolio. 
+- By purchasing derivative products, investors can hedge their portfolio against particular events.
+- Through securitization, one combines different financial assets and sells parts of this combination(some parts bearing more risk than others) to different investors, thereby transferring them the risks of the initial assets.
+
+### Basic Concepts of Finance
+
+Focus on average returns as well -- not only on latest returns.
+
+Higher return is good but risk matters.
+
+There is a tradeoff between average return and risk.
+
+The higher the average return compared to the risk -- the better.
+
+*Return Risk Ratio*
+
+Average return over X amount of time: 4%
+Average risk over X amount of time: 10%
+
+return-risk ratio = 4/10 = 0.4 = 40%
+
+> The higher the return-risk ratio - the better(in isolation, however, you should also be aware of the possible losses in events of the occurrence of the risk events)
+
+#### Relative Frequency of returns (Histogram)
+
+Q: You have a sample of past returns. You want to know what the historical probability of observing a return between 10% and 20% has been over your sample. How would you proceed?
+
+A: Count how many returns are between 10% and 20% in your sample and divide this figure by the total amount of returns there are in your sample.
+
+D: By doing this computation, you assess the relative frequency of observing a return between 10% and 20% in your sample. This relative frequency is also called *historical probability* and gives information about the chance of observing a return between 10% and 20%.
+
+### Extra Reading
+
+https://www.vanguard.co.uk/documents/portal/literature/investment-fundamentals-guide.pdf
+
+http://people.stern.nyu.edu/adamodar/New_Home_Page/background/portmgmt.htm
+
