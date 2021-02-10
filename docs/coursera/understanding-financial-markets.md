@@ -132,7 +132,7 @@ A loan made to the bond's issuer. Can be a company, government or some other ins
 Types of bonds:
 
 - Government bonds -- such as Gilts from UK. These are perceived as `no risk` by default, thus pays very low interest rates.
-- Coorporate bonds -- companies also issue bonds. These provide credit for the company for their day to day operations, avoiding selling shares or reaching for the bank for a loan. Creditworthyness of a company for their bonds are assessed just like individuals. Of course, stable companies with lower risk offer low percentage bonds, while high risk companies issue high interest rate bonds.
+- Corporate bonds -- companies also issue bonds. These provide credit for the company for their day to day operations, avoiding selling shares or reaching for the bank for a loan. Creditworthyness of a company for their bonds are assessed just like individuals. Of course, stable companies with lower risk offer low percentage bonds, while high risk companies issue high interest rate bonds.
 
 Property:
 
@@ -152,8 +152,11 @@ Different types of pooled funds:
 Active Managers: aim to beat the return of the market index or benchmark
 Passive Managers: aim to replicate the market index or benchmark
 
-
-
-
 http://people.stern.nyu.edu/adamodar/New_Home_Page/background/portmgmt.htm
+
+## Module 2
+
+- [Money Instruments](https://www.thebalance.com/money-market-instruments-types-role-in-financial-crisis-3305528) is not equalent of currency but traded
+
+- [Net Present Value](https://www.investopedia.com/terms/n/npv.asp) - simple rule when investing in projects to calculate net present value and invest in positive ones
 
