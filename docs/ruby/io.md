@@ -172,3 +172,15 @@ end
 ```
 
 Full source code [here](https://github.com/elm-city-craftworks/practicing-ruby-examples/tree/master/v7/002)
+
+- TCP Socket: Allows basic I/O operations on a network between client and a server. OS provides low level API for sockets which is wrapped by the higher level programming languages.
+
+- Ruby's I/O class provides the most comprehensive stream processing behaviour. Sockets are treaded similarly to files for basic reading, writing and stream processing operations. This is coming from the notion of treating everything like a file in UNIX. Read more [here](https://www.howtogeek.com/117939/htg-explains-what-everything-is-a-file-means-on-linux/)
+
+- There are two distinct types of sockets - Connection and Listening sockets. Clients only need to make use of connection sockets while servers can make use of both. When a client communicates with the TCP server, it creates a socket by specifying IP and the port, then tries to establish a connection. 
+
+- On the server side the listening socket is bound to a particular port, and its job is to process client's incoming requests. Once the request is processed, it creates a connection socket.
+
+- Main difference is that the in listening sockets the `port` is explicitly defined and well known in advance whereas connection sockets are assigned ports based on [`ephemeral port range`](https://en.wikipedia.org/wiki/Ephemeral_port)
+
+- It's important to close the sockets explicitly to free resources and make sure connection does not send or wait for any response. Nevertheless, Ruby GC will close any connections that are not references anymore itself.
