@@ -160,3 +160,14 @@ http://people.stern.nyu.edu/adamodar/New_Home_Page/background/portmgmt.htm
 
 - [Net Present Value](https://www.investopedia.com/terms/n/npv.asp) - simple rule when investing in projects to calculate net present value and invest in positive ones
 
+### Calculation of annual returns
+
+Let's go over an example:
+
+Price of gold in 1975: 25$
+Price of gold in 2016: 1000$
+
+Over 45 year period, what is the average annual returns on initial investment?
+
+`25 * (1 + Annual Returns)^45 = 1000`
+

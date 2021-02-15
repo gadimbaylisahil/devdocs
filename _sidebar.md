@@ -6,6 +6,9 @@
   - [All about I/O](docs/ruby/io.md)
   - [Testing](docs/ruby/testing.md)
 
+- Bash
+  - [Cheatsheet](docs/bash/cheatsheet.md)
+
 - Performance
   - [Active Record](docs/performance/active-record.md)
   - [Rails: Profiling and Benchmarking](docs/performance/rails.md)
