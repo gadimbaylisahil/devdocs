@@ -1,19 +1,16 @@
-- Linux
-
-  - [Command Line](docs/linux/command-line.md)
-
 - Ruby
   - [All about I/O](docs/ruby/io.md)
-  - [Testing](docs/ruby/testing.md)
 
 - Bash
   - [Cheatsheet](docs/bash/cheatsheet.md)
 
+- Linux
+
+  - [Command Line](docs/linux/command-line.md)
+
 - Performance
-  - [Active Record](docs/performance/active-record.md)
   - [Rails: Profiling and Benchmarking](docs/performance/rails.md)
-  - [Frontend: Stuff to care over front battleground](docs/performance/frontend.md)
-  - [HTTP Caching](docs/performance/http-caching.md)
+  - [Frontend](docs/performance/frontend.md)
 
 - Multitenancy
 
@@ -30,7 +27,7 @@
 
   - [Understanding Financial Markets](docs/coursera/understanding-financial-markets.md)
 
-- Stuff from screencasts
+- Stuff from casts
 
   - [System Design](docs/cast_notes/system_design.md)
   - [SEO](docs/cast_notes/seo.md)
