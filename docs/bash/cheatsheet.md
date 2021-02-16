@@ -1,6 +1,6 @@
 # Bash Cheatsheet
 
-## `shellcheck`
+## shellcheck
 
 Verify validity of scripts.
 
@@ -8,23 +8,23 @@ Verify validity of scripts.
 
 ## shell variables
 
-var=value `with no spaces in between, else it will run it as a command`
+`var=value` with no spaces in between, else it will run it as a command
 
-echo "$var"
+`echo "$var"`
 
 > Always quote your variables
 
-a=2 and a="2" is same and evaluated as strings. Technically there is a way to do arichmetics, but it's better be avoided.
+a=2 and a="2" is same and evaluated as strings. Technically there is a way to do arithmetics, but it's better be avoided.
 
 ### interpolation
 
-cat "${var}sometexttoappend"
+`cat "${var}sometexttoappend"`
 
 ## environment variables
 
-`env` to list all available env variables
+Run `env` to list all available env variables
 
-```sh
+```bash
 # To set an env variable
 
 NEWENVVAR=somevalue
@@ -39,13 +39,13 @@ export NEWENVVAR
 
 Access arguments with:
 
-$0 - svg2png $1 pic1.svg $2 pic1.png
+`$0 - svg2png $1 pic1.svg $2 pic1.png`
 
-When command is run you can access all arguments as array with `$@` except the $0
+When command is run, you can access all arguments as array with `$@` except the $0
 
 ### loop over arguments
 
-```sh
+```bash
 for i in "$@"
 do
 ...
@@ -54,7 +54,7 @@ done
 
 ### shift
 
-```sh
+```bash
 echo $1 prints first argument
 shift removes first argument
 echo $1 prints second argument
@@ -71,11 +71,11 @@ Most bash commands are programs but there are builtin functions as well such as:
 5. cd
 6. printf
 
-`which/type command` will tell you what it is.
+`which|type command` will tell you what it is.
 
 ## quotes
 
-single quotes will not expand variables while double quotes will.
+Single quotes will not expand variables while double quotes will.
 
 Thus, `echo: 'home: $HOME'` will return `echo: $HOME`
 
@@ -99,11 +99,11 @@ STDIN
 STDOUT
 STDERR
 
-### Redirect stderr
+### redirect stderr
 
 `somecommand 2> file.txt` -> redirects stderr to file.txt
 
-### Redirect stderr to stdout
+### redirect stderr to stdout
 
 `somecommand 2>&1` -> redirects stderr to stdout
 
@@ -114,8 +114,6 @@ STDERR
 `echo x | sudo tee /etc/xyz`
 
 See [here](https://stackoverflow.com/questions/82256/how-do-i-use-sudo-to-redirect-output-to-a-location-i-dont-have-permission-to-wr)
-
-## brackets
 
 ### arithmetics
 
@@ -141,7 +139,7 @@ See [here](https://stackoverflow.com/questions/82256/how-do-i-use-sudo-to-redire
 
 `x=(1 2 3)` creates an array
 
-### [] vs [[]]
+### brackets & [] vs [[]]
 
 [Quick Reference](https://www.assertnotmagic.com/2018/06/20/bash-brackets-quick-reference/)
 
@@ -228,7 +226,7 @@ wc < mypipe
 
 ## parameter expansion
 
-${} is powerful, few usages:
+`${}` is powerful - few usages:
 
 1. Using default value for the variable:
 
@@ -236,9 +234,9 @@ ${} is powerful, few usages:
 ${var:-$othervar}
 ```
 
-2. `${#var}` -> length of string or array `var`
+2. `${#var}` : length of string or array `var`
 
-3. `${var:?some error}` -> prints "some error" and exists if variable is unset or null
+3. `${var:?some error}` : prints "some error" and exists if variable is unset or null
 
 4. Search and replace
 
@@ -251,9 +249,9 @@ ${x/text/newtext}
 ${x//text/newtext}
 ```
 
-5. ${var} -> use when interpolating within a string etc...
+5. `${var}` : use when interpolating within a string etc...
 
-6. ${var:offset:length} -> get a substring of var
+6. `${var:offset:length}` : get a substring of var
 
 7. Remove prefix or suffix of some pattern from variable
 
@@ -286,13 +284,13 @@ Keep processes running even when after shell session is closed with `nohup`
 nohup command &
 ```
 
-jobs -> list all current bg processes spawned by current shell
+`jobs` : list all current bg processes spawned by current shell
 
-fg -> jump into the bg process in foreground
+`fg` : jump into the bg process in foreground
 
-bg -> resumes suspended job
+`bg` : resumes suspended job
 
-`disown` -> like `nohup` but you do it after process is started
+`disown` : like `nohup` but you do it after process is started
 
 ## trap
 
@@ -338,4 +336,3 @@ set -euo pipefail
 
 1. `set -x` -> will print out every line of script as it executes
 2. `trap read DEBUG` -> will stop before each line of code
-
