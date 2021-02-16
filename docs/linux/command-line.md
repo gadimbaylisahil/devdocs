@@ -93,3 +93,151 @@ See also `zless`, `zmore`, `zgrep`.
 ## Best practices on shell scripts
 
 [Strict Mode](http://redsymbol.net/articles/unofficial-bash-strict-mode/)
+
+## grep alternatives
+
+`ack` `ag` `ripgrep`
+
+## xargs
+
+takes whitespace separated strings from stdin and converts into command-line arguments
+
+`echo "home tmp" | xargs ls` 
+
+will run `ls home tmp`
+
+### useful tips
+
+`xargs -n 1` will run a separate process per each input. Pass in `-P n` to set max number of parallel processes
+
+## awk
+
+tiny language to manipulate columns of data.
+
+Example:
+
+```bash
+ps | awk -F, '{print $3}
+```
+
+## sed
+
+most often used for replacements
+
+```bash
+sed s/match/replace/g file.txt
+```
+
+```bash
+sed 5d # deletes the 5th line
+```
+
+```bash
+sed /cat/d # deletes the line matching cat
+```
+
+```bash
+sed -n 5,30p # prints lines between 5 to 30
+```
+
+```bash
+sed 'i 17 panda' # insert panda on line 17
+```
+
+```bash
+sed G # double space a file
+```
+
+## bash tricks
+
+- Commands that start with `space` does not go to the history
+
+- !! run the last command ran as sudo
+
+- ctrl + r : search history
+
+- ctrl + z : suspend a process, `fg` to get back to it in foreground `bg` in background
+
+- `fc` : fix command, opens the last ran command in $EDITOR
+
+## disk usage
+
+```bash
+du # tells how much diskspace a /directory occupies
+  -h # human readable format
+  -s # summary
+
+df # tells the free space over each partitions
+  -h # human readable format
+
+ncdu # interactive prompt going over files/directories showing the sizes
+  -h # human readable format
+```
+
+## watch
+
+rerun commands intermittently (2 seconds by def)
+
+## cal
+
+calendar
+
+## xsel/xclip
+
+paste contents into terminal from system clipboard
+
+## comm
+
+find common lines in two sorted files
+
+## file
+
+figure out the mime details of the file
+
+## ts
+
+add timestamps
+
+## kill
+
+kill is not only used to kill processes. It can be used to send any signal to any program
+
+### kill -l
+
+list all signals
+
+### pkill
+
+kills a process based on pattern matched and pid found
+
+`pkill -f firefox`
+
+### killall -SIGNAL name
+
+signals all processes to be killed with NAME
+
+useful flags:
+
+- -w : wait for process to die
+- -i : ask before signalling
+
+## zcat
+
+cats a gzipped file
+
+## lsof
+
+lists open files
+
+### lsof -i
+
+lists open network sockets
+
+### lsof | grep deleted
+
+lists deleted files
+
+### netstat
+
+another way of showing open sockets
+
