@@ -8,6 +8,10 @@
 
   - [Command Line](docs/linux/command-line.md)
 
+- SQL
+
+  - [SELECT](docs/sql/select.md)
+
 - Performance
   - [Rails: Profiling and Benchmarking](docs/performance/rails.md)
   - [Frontend](docs/performance/frontend.md)
