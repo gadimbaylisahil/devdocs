@@ -15,6 +15,10 @@ I try to write a summary of everything I learn over the time and keep them organ
 
   - [Command Line](docs/linux/command-line.md)
 
+- SQL
+
+  - [SELECT](docs/sql/select.md)
+
 - Performance
   - [Rails: Profiling and Benchmarking](docs/performance/rails.md)
   - [Frontend](docs/performance/frontend.md)
