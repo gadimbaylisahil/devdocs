@@ -7,6 +7,7 @@
 - Linux
 
   - [Command Line](docs/linux/command-line.md)
+  - [Overview of OS](docs/linux/overview-of-os.md)
 
 - SQL
 

@@ -14,6 +14,7 @@ I try to write a summary of everything I learn over the time and keep them organ
 - Linux
 
   - [Command Line](docs/linux/command-line.md)
+  - [Overview of OS](docs/linux/overview-of-os.md)
 
 - SQL
 
