@@ -4,6 +4,7 @@ My collection of useful scripts, book reviews, notes and programming language
 gotchas. You can find more detailed articles and projects over at [ramblingcode home](https://ramblingcode.dev).
 
 I try to write a summary of everything I learn over the time and keep them organized here.
+
 - Ruby
   - [All about I/O](docs/ruby/io.md)
 
@@ -14,6 +15,7 @@ I try to write a summary of everything I learn over the time and keep them organ
   - [Overview of OS](docs/linux/overview-of-os.md)
   - [Command Line](docs/linux/command-line.md)
   - [Containers](docs/linux/containers.md)
+  - [Networking Tools](docs/linux/networking.md)
 
 - SQL
 

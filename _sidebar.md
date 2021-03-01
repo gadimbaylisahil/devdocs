@@ -8,6 +8,7 @@
   - [Overview of OS](docs/linux/overview-of-os.md)
   - [Command Line](docs/linux/command-line.md)
   - [Containers](docs/linux/containers.md)
+  - [Networking Tools](docs/linux/networking.md)
 
 - SQL
 
