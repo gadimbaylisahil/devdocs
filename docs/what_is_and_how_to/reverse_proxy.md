@@ -32,11 +32,10 @@ Besides directing requests to different web servers, reverse proxy can be useful
 
 **Monitoring and logging**, monitoring and logging the traffic becomes much easier especially when using multiple origin servers.
 
-
 ## Cons of reverse proxy
 
 - Single point of failure in case proxy is down and clients can't access the web servers directly
 
 - When using HTTPs, reverse proxy should have the SSL/TLS private keys to encrypt/decrypt the request/responses which can be compromised.
 
-- If you are using a third party service for the reverse proxy such as `Cloudflare` you are trusting them with all your web sites data
+- If you are using a third party service for the reverse proxy such as `Cloudflare` you are trusting them with all your web sites data.
