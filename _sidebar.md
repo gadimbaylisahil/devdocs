@@ -17,10 +17,7 @@
 - What is and how to setup?
 
   - [Reverse Proxy](docs/what_is_and_how_to/reverse_proxy.md)
-  - [Caching server with Memcached](docs/what_is_and_how_to/caching_server.md))
-  - [Load Balancer](docs/what_is_and_how_to/load_balancer.md)
-  - [Firewall](docs/what_is_and_how_to/firewall.md)
-  - [NGNIX web server](docs/what_is_and_how_to/ngnix_web_server.md)
+  - [Caching server with Memcached](docs/what_is_and_how_to/caching_server.md)
 
 - Performance
   - [Rails: Profiling and Benchmarking](docs/performance/rails.md)
