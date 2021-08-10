@@ -14,6 +14,12 @@
 
   - [SELECT](docs/sql/select.md)
 
+- Deployment
+
+  - [Overview](docs/deployment/birdseye.md)
+  - [Networking](docs/deployment/networking.md)
+  - [Secure Connections](docs/deployment/secure_connections.md)
+
 - What is and how to setup?
 
   - [Reverse Proxy](docs/what_is_and_how_to/reverse_proxy.md)
