@@ -101,3 +101,22 @@ On first connection to any particular server OpenSSH saves the public key of the
 
 If the private key of the server and known public key does not match, we get a warning from SSH.
 
+### SSH Tunneling
+
+SSH Tunneling is simple a way to forwards application ports from clients to servers or vice versa.
+
+Example:
+
+Local database running on port 5432 and is not exposed to internet. We still need to connect to it to maintain and this would be the case where SSH tunneling comes into play.
+
+To locally forward this port over to server, use:
+
+`ssh -L 127.0.0.1:5432:127.0.0.1:5432 $SERVER`.
+
+Local forwarding can be disabled using following settings in ssh_conf.
+
+```shell
+AllowTcpForwarding yes|no|local|remote
+AllowStreamLocalForwarding no
+```
+
