@@ -45,7 +45,6 @@ I try to write a summary of everything I learn over the time and keep them organ
 
   - [High Performance Browser Networking](docs/books/high-performance-browser-networking.md)
   - [How Linux Works](docs/books/how-linux-works.md)
-  - [Rails Performance Apocrypha](docs/books/rails-performance-apocrypha.md)
 
 - Coursera
 
@@ -55,3 +54,4 @@ I try to write a summary of everything I learn over the time and keep them organ
 
   - [System Design](docs/cast_notes/system_design.md)
   - [SEO](docs/cast_notes/seo.md)
+
