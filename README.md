@@ -40,6 +40,7 @@ I try to write a summary of everything I learn over the time and keep them organ
 - Frontend(**Shiny stuff and their quirks**)
   - [Performance](docs/frontend/performance.md)
   - [SEO](docs/frontend/seo.md)
+  - [HTML E-mail](docs/frontend/html-email.md)
 
 - Book summaries(**Book summaries, writing them let's you remember better**)
   - [High Performance Browser Networking](docs/book_summaries/high-performance-browser-networking.md)
