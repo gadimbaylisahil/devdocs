@@ -28,6 +28,7 @@ I try to write a summary of everything I learn over the time and keep them organ
       - [Command Line](docs/devops/operating_systems/linux/command-line.md)
       - [Containers](docs/devops/operating_systems/linux/containers.md)
       - [Networking Tools](docs/devops/operating_systems/linux/networking.md)
+    - [POSIX](docs/devops/operating_systems/posix.md)
   - Deployment
     - [Overview](docs/devops/deployment/birdseye.md)
     - [Networking](docs/devops/deployment/networking.md)

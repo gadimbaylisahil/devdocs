@@ -21,6 +21,7 @@
       - [Command Line](docs/devops/operating_systems/linux/command-line.md)
       - [Containers](docs/devops/operating_systems/linux/containers.md)
       - [Networking Tools](docs/devops/operating_systems/linux/networking.md)
+    - [POSIX](docs/devops/operating_systems/posix.md)
   - Deployment
     - [Overview](docs/devops/deployment/birdseye.md)
     - [Networking](docs/devops/deployment/networking.md)
@@ -33,6 +34,7 @@
 - Frontend(**Shiny stuff and their quirks**)
   - [Performance](docs/frontend/performance.md)
   - [SEO](docs/frontend/seo.md)
+  - [HTML E-mail](docs/frontend/html-email.md)
 
 - Book summaries(**Book summaries, writing them let's you remember better**)
   - [High Performance Browser Networking](docs/book_summaries/high-performance-browser-networking.md)
